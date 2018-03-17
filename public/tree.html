@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Search Your Tree</title>
+	<script
+  		src="http://code.jquery.com/jquery-3.3.1.js"
+  		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  		crossorigin="anonymous">
+  	</script>
+	<script type="text/javascript">
+
+		function capitalizeFirstLetter(string) {
+   			 return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+
+		function searchBase()
+		{
+			var first_name = document.getElementById('first_name').value;
+			var last_name = document.getElementById('last_name').value;
+			
+			first_name = first_name.toLowerCase().trim();
+			last_name = last_name.toLowerCase().trim();
+
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:3000/getFamily?first=' + first_name + '&last=' + last_name, //This URL will need change for HEROKU app.
+				success: function (result, status, xhr) {
+					console.log("success");
+					console.log(result);
+					var parents = result["parents"];
+					var person = result["person"];
+					var siblings = result["siblings"];
+
+					printPerson(person);
+					printParents(parents);
+					printSiblings(siblings);
+				},
+				error: function (xhr, status, error) {
+					console.log("ERROR\n");
+				}
+			});
+
+			function printSiblings(siblings) {
+				var div = document.getElementById('siblingsDiv');
+				div.innerHTML = "";
+				div.innerHTML += "Siblings: <br/>";
+				length = siblings.length;
+				for (var i = 0; i < length; ++i)
+					printRecord(siblings[i], 'siblingsDiv');
+			}
+
+			function printParents(parents) {
+				var father = parents['father'];
+				var mother = parents['mother'];
+				var div = document.getElementById('parentDiv');
+				div.innerHTML = "";
+				div.innerHTML += "Parents: <br/>";
+				printRecord(father, 'parentDiv');
+				printRecord(mother, 'parentDiv');
+			}
+
+			function printPerson(person) {
+				var div = document.getElementById('personDiv');
+				div.innerHTML = "";
+				div.innerHTML += "Person: <br/>";
+				printRecord(person, 'personDiv');
+			}
+
+			function printRecord(person, divID) {
+				var div = document.getElementById(divID);
+				div.innerHTML += '<p>';
+
+				div.innerHTML += 'First Name: ' + capitalizeFirstLetter(person['first_name']) + '<br/>';
+				div.innerHTML += 'Last Name: ' + capitalizeFirstLetter(person['last_name']) + '<br/>';
+				
+				var sex;
+				if(person['sex']) 
+					{ sex = 'Male' } 
+				else 
+					{ sex = 'Female'}
+
+				div.innerHTML += 'Sex: ' + sex + '<br/>';
+				div.innerHTML += 'Birth: ' + person['birth_date'].slice(0,10) + '<br/>';
+				div.innerHTML += '</p>';
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Search Your Tree</h1>
+	<form method="get" action="javascript:searchBase()">
+		First Name: <input type="text" name="first_name" id="first_name"><br/>
+		Last Name: <input type="text" name="last_name" id="last_name"><br/>
+		<input type="submit" name="Search">
+		<input type="reset" name="reset"> <br/>
+	</form>
+	<div id="personDiv"></div> <br/>
+	<div id="parentDiv"></div> <br/>
+	<div id="siblingsDiv"></div><br/>
+</body>
+</html>
