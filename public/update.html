@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Update Record</title>
+	<script type="text/javascript" src="javascripts/updateScript.js"></script>
+	<script
+  		src="https://code.jquery.com/jquery-3.3.1.js"
+  		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  		crossorigin="anonymous">
+  	</script>
+</head>
+<body>
+	<h1>Record Updater</h1>
+	<form method="get" action="javascript:search()">
+		Full Name: <input type="text" name="full_name" id="full_name" placeholder="e.g Jacob Brown">  
+		<input type="submit" name="Search" value="Search">
+	</form>
+
+	<br/>
+
+	<form method="post" action="javascript:update()" id="updateForm" style="display: none;">
+		First Name: <input type="text" name="first_name" id="first_name">
+		Last Name: <input type="text" name="last_name" id="last_name">
+		Sex: 
+		<select name="sex" id="sex">
+			<option value="true">Male</option>
+			<option value="false">Female</option>
+		</select>
+		Birth Date: <input type="text" name="birth_date" placeholder="e.g YYYY-MM-DD" id="birth_date">
+		Parent 1: <input type="text" name="P1" id="P1" placeholder="e.g John Smith">
+		Parent 2: <input type="text" name="P2" id="P2" placeholder="e.g Sahra Jane"> <br/>
+		<input type="submit" name="Update" value="Update">
+	</form>
+</body>
+</html>

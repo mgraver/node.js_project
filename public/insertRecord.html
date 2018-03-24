@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Search Your Tree</title>
+	<script type="text/javascript">
+		function validateBirth() 
+		{
+			var birthString = document.getElementById('birth_date').value;
+			//TODO: finish this
+		}
+	</script>
+</head>
+<body>
+<h1>Insert Record</h1>
+	<form method="post"	action="/newRecord">
+		First Name: <input type="text" name="first_name">
+		Last Name: <input type="text" name="last_name">
+		Sex:
+		<select name="sex">
+			<option value="true">Male</option>
+			<option value="false">Female</option>
+		</select> 
+		<br/>
+		Birth Date: <input type="text" name="birth_date" placeholder="e.g YYYY-MM-DD" id="birth_date">
+		Parent 1: <input type="text" name="P1" placeholder="e.g John Smith">
+		Parent 2: <input type="text" name="P2" placeholder="e.g Sahra Jane">
+		<br/>
+		<input type="submit" name="">
+		<input type="reset" name="">
+	</form>
+</body>
+</html>
