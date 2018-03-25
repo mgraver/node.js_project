@@ -17,7 +17,7 @@
 
 			$.ajax({
 				type: 'GET',
-				url: 'http://localhost:3000/getFamily?first=' + first_name + '&last=' + last_name, 
+				url: 'https://dry-savannah-75818.herokuapp.com/getFamily?first=' + first_name + '&last=' + last_name, 
 				//This URL will need change for HEROKU app: http://localhost:3000/getFamily?first=
 				//https://dry-savannah-75818.herokuapp.com/getFamily?first=
 				success: function (result, status, xhr) {

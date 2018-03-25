@@ -14,7 +14,7 @@ function search()
 	var name = document.getElementById('full_name').value.trim().toLowerCase().split(" ", 2);
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost:3000/getPerson?first=' + name[0] + '&last=' + name[1],
+		url: 'https://dry-savannah-75818.herokuapp.com/getPerson?first=' + name[0] + '&last=' + name[1],
 		//This URL will need change for HEROKU app: http://localhost:3000/getFamily?first=
 		//https://dry-savannah-75818.herokuapp.com/getFamily?first=
 		success: function(result, status, xhr) {
@@ -60,7 +60,7 @@ function update()
 
    $.ajax({
 		type: 'POST',
-		url: 'http://localhost:3000/update',
+		url: 'https://dry-savannah-75818.herokuapp.com/update',
 		//This URL will need change for HEROKU app: http://localhost:3000/getFamily?first=
 		//https://dry-savannah-75818.herokuapp.com/getFamily?first=
 		data: person,
