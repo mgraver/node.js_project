@@ -8,18 +8,89 @@
   		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   		crossorigin="anonymous">
   	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="javascripts/treeScript.js"></script>
 </head>
 <body>
-	<h1>Search Your Tree</h1>
-	<form method="get" action="javascript:searchBase()">
-		First Name: <input type="text" name="first_name" id="first_name"><br/>
-		Last Name: <input type="text" name="last_name" id="last_name"><br/>
-		<input type="submit" name="Search">
-		<input type="reset" name="reset"> <br/>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Search Youre Tree</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="https://dry-savannah-75818.herokuapp.com/tree.html">Home</a></li>
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/update.html">Update Record</a></li>
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/insertRecord.html">New Record</a></li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<h1 style="text-align: center;">Search Your Tree</h1>
+	<br/>
+	<br/>
+	<form method="get" action="javascript:searchBase()" class="form-inline">
+		<div class="form-group">
+		   <label for="first_name">First Name:</label>
+		   <input type="text" class="form-control" name="first_name" id="first_name">
+		</div>
+		<div class="form-group">
+		   <label for="last_name">Last Name:</label>
+		   <input type="text" class="form-control" name="last_name" id="last_name">
+		</div>
+		<input type="submit" name="Search" class="btn btn-primary">
+		<input type="reset" name="reset" class="btn btn-primary">
 	</form>
-	<div id="personDiv"></div> <br/>
-	<div id="parentDiv"></div> <br/>
-	<div id="siblingsDiv"></div><br/>
+
+	<div class="row"> 
+		<div id="personDiv" class="col-lg-4">
+			<br/>
+			<h4 style="text-align: center;"> Person </h4>
+			<table class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th>Firstname</th>
+			        <th>Lastname</th>
+			        <th>Sex</th>
+			        <th>Birth</th>
+			      </tr>
+			    </thead>
+			    <tbody id="pTable-body">
+			    </tbody>
+			  </table>
+		</div> 
+		<div id="parentDiv" class="col-lg-4">
+			<br/>
+			<h4 style="text-align: center;"> Parents </h4>
+			<table class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th>Firstname</th>
+			        <th>Lastname</th>
+			        <th>Sex</th>
+			        <th>Birth</th>
+			      </tr>
+			    </thead>
+			    <tbody id="paTable-body">
+			    </tbody>
+			  </table>
+		</div> 
+		<div id="siblingsDiv" class="col-lg-4">
+			<br/>
+			<h4 style="text-align: center;"> Siblings </h4> 
+			<table class="table table-hover">
+			    <thead>
+			      <tr>
+			        <th>Firstname</th>
+			        <th>Lastname</th>
+			        <th>Sex</th>
+			        <th>Birth</th>
+			      </tr>
+			    </thead>
+			    <tbody id="sTable-body">
+			    </tbody>
+			  </table>
+		</div>
+	</div>
 </body>
 </html>

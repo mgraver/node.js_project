@@ -3,31 +3,133 @@
 <head>
 	<meta charset="utf-8">
 	<title>Search Your Tree</title>
+	<script
+  		src="https://code.jquery.com/jquery-3.3.1.js"
+  		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  		crossorigin="anonymous">
+  	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	<script type="text/javascript">
-		function validateBirth() 
+		function checkInput() 
 		{
+			var validForm = true;
+			var validBirth = true;
+			var validF = true;
+			var validL = true;
+
 			var birthString = document.getElementById('birth_date').value;
-			//TODO: finish this
+			birthString = birthString.trim();
+			var bsLength = birthString.length
+			if (bsLength != 10)
+			{
+				validForm = false;
+				validBirth = false;
+			}
+
+			for (var i = 0; i < bsLength; i++)
+			{
+				if ((i == 4 || i == 7)  && birthString[i] != '-') 
+				{
+					validForm = false;
+					validBirth = false;
+				}
+				else
+				{
+					if (!Number.isInteger(parseInt(birthString[i])) && birthString[i] != '-')
+					{
+						validForm = false;
+						validBirth = false;
+					}
+				}
+			}
+
+			var f_Name = document.getElementById("first_name").value.trim();
+			if (f_Name.length == 0)
+			{
+				validForm = false;
+				validF = false
+			}
+
+			var f_Name = document.getElementById("last_name").value.trim();
+			if (f_Name.length == 0)
+			{
+				validForm = false;
+				validL = false
+			}
+
+			var errorDiv = document.getElementById("errorDiv");
+			errorDiv.innerHTML = "<strong>Error:</strong><br/>";
+
+			if (!validF)
+				errorDiv.innerHTML += "Invalid first name <br/>";
+
+			if (!validL)
+				errorDiv.innerHTML += "Invalid last name <br/>";
+
+			if (!validBirth)
+				errorDiv.innerHTML += "Invalid birth year <br/>";
+
+			errorDiv.style.display = "block";
+
+			return validForm;
+			//TODO: have backend send user back to home.
 		}
 	</script>
 </head>
 <body>
-<h1>Insert Record</h1>
-	<form method="post"	action="/newRecord">
-		First Name: <input type="text" name="first_name">
-		Last Name: <input type="text" name="last_name">
-		Sex:
-		<select name="sex">
-			<option value="true">Male</option>
-			<option value="false">Female</option>
-		</select> 
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="https://dry-savannah-75818.herokuapp.com/tree.html">Search Youre Tree</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/tree.html">Home</a></li>
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/update.html">Update Record</a></li>
+	      <li class="active"><a href="https://dry-savannah-75818.herokuapp.com/insertRecord.html">New Record</a></li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<h1 style="text-align: center;">Insert Record</h1>
+
+	<form method="post"	action="/newRecord" style="width: 70%; margin: 0 auto;" onsubmit="return checkInput()">
+		<div class="alert alert-danger" style="display: none;" id="errorDiv"></div>
+		<div class="form-group">
+		   <label for="first_name">First Name:</label>
+		   <input type="text" class="form-control" name="first_name" id="first_name">
+		</div>
+	
+		<div class="form-group">
+		   <label for="last_name">Last Name:</label>
+		   <input type="text" class="form-control" name="last_name" id="last_name">
+		</div>
+		
+		<div class="form-group">
+		  <label for="sex">Sex:</label>
+		    <select class="form-control" id="sex" name="sex">
+		    	<option value="true">Male</option>
+		    	<option value="false">Female</option>
+		  	</select>
+		</div>
 		<br/>
-		Birth Date: <input type="text" name="birth_date" placeholder="e.g YYYY-MM-DD" id="birth_date">
-		Parent 1: <input type="text" name="P1" placeholder="e.g John Smith">
-		Parent 2: <input type="text" name="P2" placeholder="e.g Sahra Jane">
+		<div class="form-group">
+		   <label for="birth_date">Birth Date:</label>
+		   <input type="text" class="form-control" placeholder="e.g YYYY-MM-DD" name="birth_date" id="birth_date">
+		</div>
+		<div class="form-group">
+		   <label for="P1">Parent 1:</label>
+		   <input type="text" class="form-control" placeholder="e.g John Smith" name="P1" id="P1">
+		</div>
+		<div class="form-group">
+		   <label for="P2">Parent 2:</label>
+		   <input type="text" class="form-control" placeholder="e.g Sahra Jane" name="P2" id="P2">
+		</div>
 		<br/>
-		<input type="submit" name="">
-		<input type="reset" name="">
+
+		<input type="submit" name="" class="btn btn-primary">
+		<input type="reset" name="" class="btn btn-primary">
 	</form>
 </body>
 </html>

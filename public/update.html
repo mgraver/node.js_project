@@ -9,28 +9,69 @@
   		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   		crossorigin="anonymous">
   	</script>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>Record Updater</h1>
-	<form method="get" action="javascript:search()">
-		Full Name: <input type="text" name="full_name" id="full_name" placeholder="e.g Jacob Brown">  
-		<input type="submit" name="Search" value="Search">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="https://dry-savannah-75818.herokuapp.com/tree.html">Search Youre Tree</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/tree.html">Home</a></li>
+	      <li class="active"><a href="https://dry-savannah-75818.herokuapp.com/update.html">Update Record</a></li>
+	      <li><a href="https://dry-savannah-75818.herokuapp.com/insertRecord.html">New Record</a></li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<h1 style="text-align: center;">Record Updater</h1>
+	<br/>
+
+	<form method="get" action="javascript:search()" class="form-inline">
+		<div class="form-group">
+		   <label for="full_name">Full Name:</label>
+		   <input type="text" class="form-control" name="full_name" id="full_name">
+		</div>
+		<input type="submit" name="Search" value="Search" class="btn btn-primary">
 	</form>
 
 	<br/>
 
-	<form method="post" action="javascript:update()" id="updateForm" style="display: none;">
-		First Name: <input type="text" name="first_name" id="first_name">
-		Last Name: <input type="text" name="last_name" id="last_name">
-		Sex: 
-		<select name="sex" id="sex">
-			<option value="true">Male</option>
-			<option value="false">Female</option>
-		</select>
-		Birth Date: <input type="text" name="birth_date" placeholder="e.g YYYY-MM-DD" id="birth_date">
-		Parent 1: <input type="text" name="P1" id="P1" placeholder="e.g John Smith">
-		Parent 2: <input type="text" name="P2" id="P2" placeholder="e.g Sahra Jane"> <br/>
-		<input type="submit" name="Update" value="Update">
+	<form method="post" action="javascript:update()" id="updateForm" 
+	      style="display: none; width: 70%; margin: 0 auto;" onsubmit="return checkInput()">
+		<div class="alert alert-danger" style="display: none;" id="errorDiv"></div>
+		<div class="form-group">
+		   <label for="first_name">First Name:</label>
+		   <input type="text" class="form-control" name="first_name" id="first_name">
+		</div>
+		<div class="form-group">
+		   <label for="last_name">Last Name:</label>
+		   <input type="text" class="form-control" name="last_name" id="last_name">
+		</div>
+
+		<div class="form-group">
+		  <label for="sex">Sex:</label>
+		    <select class="form-control" id="sex">
+		    <option value="true">Male</option>
+		    <option value="false">Female</option>
+		  </select>
+		</div>
+		<div class="form-group">
+		   <label for="birth_date">Birth Date:</label>
+		   <input type="text" class="form-control" placeholder="e.g YYYY-MM-DD" name="birth_date" id="birth_date">
+		</div>
+		<div class="form-group">
+		   <label for="P1">Parent 1:</label>
+		   <input type="text" class="form-control" placeholder="e.g John Smith" name="P1" id="P1">
+		</div>
+		<div class="form-group">
+		   <label for="P2">Parent 2:</label>
+		   <input type="text" class="form-control" placeholder="e.g Sahra Jane" name="P2" id="P2">
+		</div>
+
+		<input type="submit" name="Update" value="Update" class="btn btn-primary">
 	</form>
 </body>
 </html>

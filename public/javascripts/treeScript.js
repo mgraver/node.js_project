@@ -10,9 +10,9 @@
 			
 			first_name = first_name.toLowerCase().trim();
 			last_name = last_name.toLowerCase().trim();
-			document.getElementById('siblingsDiv').innerHTML = "";
-			document.getElementById('parentDiv').innerHTML = "";
-			document.getElementById('personDiv').innerHTML = "";
+			document.getElementById('sTable-body').innerHTML = "";
+			document.getElementById('paTable-body').innerHTML = "";
+			document.getElementById('pTable-body').innerHTML = "";
 
 
 			$.ajax({
@@ -37,30 +37,25 @@
 			});
 
 			function printSiblings(siblings) {
-				var div = document.getElementById('siblingsDiv');
-				div.innerHTML += "Siblings: <br/>";
 				length = siblings.length;
 				for (var i = 0; i < length; ++i)
-					printRecord(siblings[i], 'siblingsDiv');
+					printRecord(siblings[i], 'sTable-body');
 			}
 
 			function printParents(parents) {
 				var father = parents['father'];
 				var mother = parents['mother'];
-				var div = document.getElementById('parentDiv');
-				div.innerHTML += "Parents: <br/>";
-				printRecord(father, 'parentDiv');
-				printRecord(mother, 'parentDiv');
+				printRecord(father, 'paTable-body');
+				printRecord(mother, 'paTable-body');
 			}
 
 			function printPerson(person) {
-				var div = document.getElementById('personDiv');
-				div.innerHTML += "Person: <br/>";
-				printRecord(person, 'personDiv');
+				printRecord(person, 'pTable-body');
 			}
 
-			function printRecord(person, divID) {
-				var div = document.getElementById(divID);
+			function printRecord(person, tableBID) {
+				//DEBUG FUNCTION BODY
+				/*var div = document.getElementById(divID);
 				div.innerHTML += '<p>';
 
 				div.innerHTML += 'First Name: ' + capitalizeFirstLetter(person['first_name']) + '<br/>';
@@ -74,6 +69,38 @@
 
 				div.innerHTML += 'Sex: ' + sex + '<br/>';
 				div.innerHTML += 'Birth: ' + person['birth_date'].slice(0,10) + '<br/>';
-				div.innerHTML += '</p>';
+				div.innerHTML += '</p>';*/
+
+				var table_body = document.getElementById(tableBID);
+
+				var tr = document.createElement('tr');
+				var first = document.createElement('td');
+   				var last = document.createElement('td');
+   				var sex_d = document.createElement('td');
+   				var birth = document.createElement('td');
+
+   				var f_text = document.createTextNode(capitalizeFirstLetter(person['first_name']));
+   				var l_text = document.createTextNode(capitalizeFirstLetter(person['last_name']));
+
+   				var sex;
+				if(person['sex']) 
+					{ sex = 'Male' } 
+				else 
+					{ sex = 'Female'}
+
+   				var s_text = document.createTextNode(sex);
+   				var b_text = document.createTextNode(person['birth_date'].slice(0,10));
+
+   				first.appendChild(f_text);
+   				last.appendChild(l_text);
+   				sex_d.appendChild(s_text);
+   				birth.appendChild(b_text);
+
+   				tr.appendChild(first);
+   				tr.appendChild(last);
+   				tr.appendChild(sex_d);
+   				tr.appendChild(birth);
+
+   				table_body.appendChild(tr);
 			}
 		}
