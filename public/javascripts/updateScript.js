@@ -63,7 +63,8 @@ function checkInput()
 			if (!validBirth)
 				errorDiv.innerHTML += "Invalid birth year <br/>";
 
-			errorDiv.style.display = "block";
+			if (!validForm)
+				errorDiv.style.display = "block";
 
 			return validForm;
 			//TODO: have backend send user back to home.
@@ -80,8 +81,8 @@ function search()
 	$.ajax({
 		type: 'GET',
 		url: 'https://dry-savannah-75818.herokuapp.com/getPerson?first=' + name[0] + '&last=' + name[1],
-		//This URL will need change for HEROKU app: http://localhost:3000/getFamily?first=
-		//https://dry-savannah-75818.herokuapp.com/getFamily?first=
+		//This URL will need change for HEROKU app: http://localhost:3000/getPerson?first=
+		//https://dry-savannah-75818.herokuapp.com/getPerson?first=
 		success: function(result, status, xhr) {
 			person = result;
 			fillUpdateForm();
@@ -126,7 +127,7 @@ function update()
    $.ajax({
 		type: 'POST',
 		url: 'https://dry-savannah-75818.herokuapp.com/update',
-		//This URL will need change for HEROKU app: http://localhost:3000/getFamily?first=
+		//This URL will need change for HEROKU app: http://localhost:3000/
 		//https://dry-savannah-75818.herokuapp.com/update
 		data: person,
 		error: function (xhr, status, error) {

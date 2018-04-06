@@ -71,10 +71,12 @@
 			if (!validBirth)
 				errorDiv.innerHTML += "Invalid birth year <br/>";
 
-			errorDiv.style.display = "block";
+			if (!validForm)
+				errorDiv.style.display = "block";
 
 			return validForm;
-			//TODO: have backend send user back to home.
+			//http://localhost:3000/tree.html
+			//https://dry-savannah-75818.herokuapp.com
 		}
 	</script>
 </head>

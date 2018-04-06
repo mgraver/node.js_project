@@ -89,8 +89,16 @@ function getFamily(req, res) {
 				console.log(rows);
 				
 				var parents = {}
-				parents["father"] = rows[0];
-				parents["mother"] = rows[1];
+				if (rows[0]['sex'] == true)
+				{
+					parents["father"] = rows[0];
+					parents["mother"] = rows[1];
+				}
+				else
+				{
+					parents["father"] = rows[1];
+					parents["mother"] = rows[0];
+				}
 				family["parents"] = parents;
 
 				pgPool.query(sidQuery, [ parents["father"]["id"], parents["mother"]["id"], person["id"]]) //Get the siblings
@@ -101,7 +109,10 @@ function getFamily(req, res) {
 					console.log(rows);
 					//TODO: IF no siblings return family
 					if (rows.length == 0)
+					{
 						res.send(family);
+						return;
+					}
 
 					var siblings = [];
 					for (var i in rows)
@@ -201,11 +212,10 @@ function newRecord(req, res) {
 				}
 				else
 					pgPool.query(relationsQ, [null, null, newID]);
-
-				//TODO: do somethign with result.
 			});//END of second then
 
 		});// END of first then. 
+		res.redirect('tree.html');
 }
 
 

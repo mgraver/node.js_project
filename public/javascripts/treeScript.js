@@ -37,12 +37,18 @@
 			});
 
 			function printSiblings(siblings) {
+				if (siblings === undefined)
+					return;
+
 				length = siblings.length;
 				for (var i = 0; i < length; ++i)
 					printRecord(siblings[i], 'sTable-body');
 			}
 
 			function printParents(parents) {
+				if (parents === undefined) 
+					return;
+				
 				var father = parents['father'];
 				var mother = parents['mother'];
 				printRecord(father, 'paTable-body');
