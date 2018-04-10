@@ -51,8 +51,12 @@
 				
 				var father = parents['father'];
 				var mother = parents['mother'];
-				printRecord(father, 'paTable-body');
-				printRecord(mother, 'paTable-body');
+				
+				if (father["id"] != null)
+					printRecord(father, 'paTable-body');
+
+				if (mother["id"] != null)
+					printRecord(mother, 'paTable-body');
 			}
 
 			function printPerson(person) {

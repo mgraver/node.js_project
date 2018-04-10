@@ -83,22 +83,44 @@ function getFamily(req, res) {
 				rows = result.rows;
 				
 				if (rows.length == 0)
+				{
 					res.send(family);
+					return;
+				}
 
 				console.log("\nparents:");
 				console.log(rows);
 				
 				var parents = {}
-				if (rows[0]['sex'] == true)
+				if (rows.length == 1)
 				{
-					parents["father"] = rows[0];
-					parents["mother"] = rows[1];
+					if (rows[0]['sex'] == true)
+					{
+						parents["father"] = rows[0];
+						parents["mother"] = {} 
+						parents["mother"]["id"] = null;
+					}
+					else
+					{
+						parents["mother"] = rows[0];
+						parents["father"] = {};
+						parents["father"]["id"] = null;
+					}
 				}
 				else
 				{
-					parents["father"] = rows[1];
-					parents["mother"] = rows[0];
+					if (rows[0]['sex'] == true)
+					{
+						parents["father"] = rows[0];
+						parents["mother"] = rows[1];
+					}
+					else
+					{
+						parents["father"] = rows[1];
+						parents["mother"] = rows[0];
+					}
 				}
+				
 				family["parents"] = parents;
 
 				pgPool.query(sidQuery, [ parents["father"]["id"], parents["mother"]["id"], person["id"]]) //Get the siblings
